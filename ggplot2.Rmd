@@ -3,31 +3,37 @@ title: "ggplot2"
 author: "chenxin fan"
 date: "7/6/2020"
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
-
-```{r setup, include=FALSE}
+learn data visulization with 'ggplot2'
+```{r setup, message = F, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(MASS)
+library(conflicted)
+conflict_prefer("select", "dplyr")
 ```
+```{r, message = F}
+#National Parks in California
+ca <- read_csv("data/ca.csv") 
 
-## R Markdown
-### 中文说明
+#Acadia National Park
+acadia <- read_csv("data/acadia.csv")
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+#Southeast US National Parks
+se <- read_csv("data/se.csv")
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+#2016 Visitation for all Pacific West National Parks
+visit_16 <- read_csv("data/visit_16.csv")
 
-```{r cars}
-summary(cars)
+#All Nationally designated sites in Massachusetts
+mass <- read_csv("data/mass.csv")
 ```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r}
+head(ca)
 ```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+```{r}
+ggplot(data = ca) + 
+  geom_point(aes(x = year, y = visitors))
+```
